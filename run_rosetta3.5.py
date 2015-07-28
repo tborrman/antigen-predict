@@ -11,6 +11,7 @@ def main():
 	parser.add_argument('-pdb', help='pdb ID (3QIB)', dest='pdb', type=str, required=True)
 	parser.add_argument('-start', help='starting residue position for peptide', dest='start', type=int, required=True)
 	parser.add_argument('-pMHC', help='calculate dG for pMHC complex', dest='pMHC', action='store_true')
+	parser.add_argument('-w', help='weights file for scoring function (standard.wts)', dest='w')
 
 	args=parser.parse_args()
 	in_file=args.in_file
@@ -18,13 +19,13 @@ def main():
 	pdb=args.pdb
 	start=args.start
 	pMHC=args.pMHC
+	w=args.w
 
 	if pMHC:
 		pep_pdb_file = pdb + '_pMHC.trunc.pdb'
+		
 	else:
 		pep_pdb_file = pdb + '_peptide.trunc.pdb'
-	
-
 
 	# Process array
 	processes = []
@@ -47,18 +48,32 @@ def main():
 		for i in range(len(peptide)):
 			RESFILE.write(str(start + i)  + ' C PIKAA ' + peptide[i] + '\n')
 		RESFILE.close()
-		# Score peptide/pMHC
-		process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
-		'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pep_pdb_file, '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
-		'-out:file:scorefile','pep_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
-		'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14'])
-		processes.append(process)
-		# Score complex
-		process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
-		'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pdb + '.trunc.pdb', '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
-		'-out:file:scorefile','com_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
-		'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14'])
-		processes.append(process)
+		if w:
+			# Score peptide/pMHC
+			process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
+			'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pep_pdb_file, '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
+			'-out:file:scorefile','pep_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
+			'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14', '-score:weights', w])
+			processes.append(process)
+			# Score complex
+			process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
+			'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pdb + '.trunc.pdb', '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
+			'-out:file:scorefile','com_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
+			'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14', '-score:weights', w])
+			processes.append(process)
+		else:
+			# Score peptide/pMHC
+			process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
+			'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pep_pdb_file, '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
+			'-out:file:scorefile','pep_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
+			'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14'])
+			processes.append(process)
+			# Score complex
+			process = subprocess.Popen(['/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_source/bin/fixbb.linuxgccrelease', '-database', 
+			'/home/tb37w/rosetta3.5/rosetta-3.5/rosetta_database/', '-s', pdb + '.trunc.pdb', '-resfile', 'resfile_' + str(part) + '_' + str(line_index),
+			'-out:file:scorefile','com_score_' + str(part) + '_' + str(line_index) + '.sc', '-out:file:score_only', '-extrachi_cutoff', '12', 
+			'-ex1', '-ex2', '-ex3', '-constant_seed', '-jran', '14'])
+			processes.append(process)
 
 		for proc in processes:
 			proc.wait()
