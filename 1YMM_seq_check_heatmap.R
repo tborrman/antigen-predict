@@ -6,7 +6,6 @@ parser <- ArgumentParser(description="Make heatmap to check selection round sequ
 parser$add_argument("-r", help="selection round", type="character", dest="round", required=TRUE)
 
 args <- parser$parse_args()
-corrs <- c()
 wkdir <- getwd()
 file <- "1YMM_sub_matrix_seq_check"
 
