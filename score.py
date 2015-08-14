@@ -40,7 +40,7 @@ def score(pdb, label, out_dir):
 		os.makedirs(out_dir)
 	score_cmd = [ros_path + 'rosetta_source/bin/score.linuxgccrelease', '-database',
 	ros_path + 'rosetta_database/', '-s', pdb , '-out:file:scorefile', 
-	out_dir + '/' + label + '.sc', '-extrachi_cutoff', '12', '-ex1', '-ex2', '-ex3']
+	out_dir + '/' + label + '.sc']
 	process = subprocess.Popen(score_cmd)
 	process.wait()
 
@@ -52,8 +52,7 @@ def weights_score(pdb, label, weights, out_dir):
 		os.makedirs(out_dir)
 	score_cmd = [ros_path + 'rosetta_source/bin/score.linuxgccrelease', '-database',
 	ros_path + 'rosetta_database/', '-s', pdb , '-out:file:scorefile', 
-	out_dir + '/' + label + '.sc', '-extrachi_cutoff', '12', '-ex1', '-ex2', '-ex3',
-	'-score:weights', weights]
+	out_dir + '/' + label + '.sc', '-score:weights', weights]
 	process = subprocess.Popen(score_cmd)
 	process.wait()
 	
