@@ -12,5 +12,6 @@ Sequencing data downloaded from Sequence Read Archive (SRA) under project code [
 - `[PDB]_seq_check.py`
 - `[PDB]_seq_check_heatmap.R`
 
+### Score
 
 
