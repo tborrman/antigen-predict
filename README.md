@@ -9,8 +9,8 @@ Sequencing data downloaded from Sequence Read Archive (SRA) under project code [
 - Extract reads from individual selection rounds with `[PDB_id]_process_step1.py` 
 
 ### Validate recovered peptide sequences
-- `[PDB_id]_seq_check.py`
-- `[PDB_id]_seq_check_heatmap.R`
+- `[PDB]_seq_check.py`
+- `[PDB]_seq_check_heatmap.R`
 
 
 
