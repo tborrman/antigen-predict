@@ -6,7 +6,7 @@ from Bio.Alphabet import IUPAC
 import re
 
 def main():
-	parser = argparse.ArgumentParser(description= 'Deconvolute Birnbaum seq data into rounds of selection from specific library')
+	parser = argparse.ArgumentParser(description= 'Deconvolute 4P2R seq data into rounds of selection from specific library')
 	parser.add_argument('-f', help='fastq file (must be only single reads or single mates from paired end reads)', dest='fastq', type=str, required=True)
 	parser.add_argument('-b', help=' 6 nucleotide dna barcode for selection round and library', type=str, dest='barcode', required=True)
 
