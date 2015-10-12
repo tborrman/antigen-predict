@@ -41,11 +41,21 @@ def main():
 	RND4.readline()
 	for line in RND4:
 		scores[line.split()[0]] = [float(line.split()[1]), float(line.split()[header.index(args.s)])]
+	PRE.close()
+	RND4.close()
+
+	# Store only round 4 reads in dictionary
+	RND4 = open('round_4/all/score_table.txt', 'r')
+	rnd4_scores = {}
+	RND4.readline()
+	for line in RND4:
+		rnd4_scores[line.split()[0]] = [float(line.split()[1]), float(line.split()[header.index(args.s)])]
+	RND4.close()
 
 	# Sort scoring
 	sorted_scoring = sorted(scores.keys(), key = lambda k: scores[k][1])
 	# Sort abundant
-	sorted_abundant = sorted(scores.keys(), key = lambda k: scores[k][0], reverse=True)
+	sorted_abundant = sorted(rnd4_scores.keys(), key = lambda k: rnd4_scores[k][0], reverse=True)
 	
 	# Make top scoring heatmaps
 	max_bound = 1000
