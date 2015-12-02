@@ -3,7 +3,7 @@
 #BSUB -q long
 #BSUB -W 336:00
 #BSUB -R rusage[mem=5000]
-#BSUB -J "myarray[1-15715]"
+#BSUB -J "myarray[1-15716]%1000"
 #BSUB -oo out.%I
 #BSUB -eo err.%I
 
