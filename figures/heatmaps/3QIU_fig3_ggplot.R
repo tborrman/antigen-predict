@@ -4,7 +4,7 @@ library(ggplot2)
 library(reshape2)
 library(grid)
 
-parser <- ArgumentParser(description="Script to compute Figure 3 heatmaps for 3QIB pdb")
+parser <- ArgumentParser(description="Script to compute Figure 3 heatmaps for 3QIU pdb")
 args <- parser$parse_args()
 corrs <- c()
 wkdir <- getwd()
@@ -23,13 +23,13 @@ anchors <- c("black", "red", "black", "red", rep("black", 7), "red", "red")
 # WT reside subset
 wt_df <- abundant_df.m[c(1,23,50,68,81,120,130,149,174,181,217,229,246),]
 # Substitution subset
-sub_df <- abundant_df.m[c(47,54,59,105,164,216),]
+sub_df <- abundant_df.m[c(161,105,86,59),]
 
 
 png(paste(wkdir,"/", abundant_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
 print(ggplot(abundant_df.m, aes(variable, amino, fill=value)) 
 	+ geom_tile()
-	+ scale_fill_gradient(low="white", high="red", breaks=c(0,1), lim=c(0,1)) 
+	+ scale_fill_gradient(low="white", high="blue", breaks=c(0,1), lim=c(0,1)) 
 	+ scale_y_discrete(limits=rev(levels(abundant_df.m$amino))) 
 	+ labs(x="Peptide position", y= "Amino acid", title="Top 50 most abundant peptides", fill="")
 	+ theme(axis.text.y=element_text(size=15, colour="black"), axis.title.y=element_text(size=20, vjust=.2),
@@ -57,13 +57,13 @@ anchors <- c("black", "red", "black", "red", rep("black", 7), "red", "red")
 # WT reside subset
 wt_df <- score_df.m[c(1,23,50,68,81,120,130,149,174,181,217,229,246),]
 # Substitution subset
-sub_df <- score_df.m[c(47,54,59,105,164,216),]
+sub_df <- abundant_df.m[c(161,105,86,59),]
 
 
 png(paste(wkdir,"/", score_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
 print(ggplot(score_df.m, aes(variable, amino, fill=value)) 
 	+ geom_tile()
-	+ scale_fill_gradient(low="white", high="red", breaks=c(0,1), lim=c(0,1)) 
+	+ scale_fill_gradient(low="white", high="blue", breaks=c(0,1), lim=c(0,1)) 
 	+ scale_y_discrete(limits=rev(levels(score_df.m$amino))) 
 	+ labs(x="Peptide position", y= "Amino acid", title="Top 50 best scoring peptides", fill="")
 	+ theme(axis.text.y=element_text(size=15, colour="black"), axis.title.y=element_text(size=20, vjust=.2),
