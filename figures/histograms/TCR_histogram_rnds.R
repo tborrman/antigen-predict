@@ -23,6 +23,7 @@ title("Preselection", cex.main=2.5, line=1.5, font.main=1)
 par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 8000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_0$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_1$bind_pep_alone, breaks=seq(-200,5000, by=50), col='red', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
@@ -31,6 +32,7 @@ title("Round 1", cex.main=2.5, line=1.5, font.main=1)
 par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 8000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_1$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_2$bind_pep_alone, breaks=seq(-200,5000, by=50), col='red', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
@@ -39,6 +41,7 @@ title("Round 2", cex.main=2.5, line=1.5, font.main=1)
 par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 3000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_2$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_3$bind_pep_alone, breaks=seq(-200,5000, by=50), col='red', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
@@ -47,6 +50,7 @@ title("Round 3", cex.main=2.5, line=1.5, font.main=1)
 par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 900, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_3$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_4$bind_pep_alone, breaks=seq(-200,5000, by=50), col='red', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
@@ -55,6 +59,7 @@ title("Round 4", cex.main=2.5, line=1.5, font.main=1)
 par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 400, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_4$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 
 
@@ -65,30 +70,38 @@ score_table_2 <- read.table(paste(wkdir, "/3QIU/round_2/all/score_table.txt", se
 score_table_3 <- read.table(paste(wkdir, "/3QIU/round_3/all/score_table.txt", sep=""), header=TRUE, sep="\t")
 score_table_4 <- read.table(paste(wkdir, "/3QIU/round_4/all/score_table.txt", sep=""), header=TRUE, sep="\t")
 
+
+
+
 hist(score_table_0$bind_pep_alone, breaks=seq(-200,5000, by=50), col='blue', lty="blank", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 20000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_0$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_1$bind_pep_alone, breaks=seq(-200, 5000, by= 50), col='blue', lty="blank", xlab="",
      main="", xlim=c(-200, 3500), cex.lab=2, cex.main=2,  axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 20000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_1$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_2$bind_pep_alone, breaks=seq(-200,5000, by=50), col='blue', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 6000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_2$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_3$bind_pep_alone, breaks=seq(-200,5000, by=50), col='blue', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 4500, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_3$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_4$bind_pep_alone, breaks=seq(-200,5000, by=50), col='blue', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 3000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_4$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 
 # 4P2R
@@ -102,26 +115,31 @@ hist(score_table_0$bind_pep_alone, breaks=seq(-1000,7000, by=50), col='forestgre
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 20000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_0$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_1$bind_pep_alone, breaks=seq(-1000,7000, by=50), col='forestgreen', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 20000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_1$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_2$bind_pep_alone, breaks=seq(-1000,7000, by=50), col='forestgreen', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 2500, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_2$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_3$bind_pep_alone, breaks=seq(-1000,7000, by=50), col='forestgreen', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 2000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_3$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_4$bind_pep_alone, breaks=seq(-1000,7000, by=50), col='forestgreen', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-200,3500), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(2000, 1500, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_4$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 
 # 1YMM
@@ -135,26 +153,31 @@ hist(score_table_0$bind_pep_alone, breaks=seq(-500, 4000, by=30), col='mediumorc
 		main="", xlim=c(-100,2200), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(1000, 30000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_0$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_1$bind_pep_alone, breaks=seq(-500, 4000, by=30), col='mediumorchid4', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-100,2200), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(1000, 12000, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_1$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_2$bind_pep_alone, breaks=seq(-500, 4000, by=30), col='mediumorchid4', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-100,2200), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(1000, 2500, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_2$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_3$bind_pep_alone, breaks=seq(-500, 4000, by=30), col='mediumorchid4', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-100,2200), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(1000, 1200, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_3$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 hist(score_table_4$bind_pep_alone, breaks=seq(-500, 4000, by=30), col='mediumorchid4', lty="blank", ylab="", xlab="",
 		main="", xlim=c(-100,2200), cex.lab=2, cex.main=2, axes=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
+text(1000, 550, bquote(mu~"="~.(sprintf("%.2f",round(mean(score_table_4$bind_pep_alone),2)))), cex = 2)
 box(bty="l")
 
 
