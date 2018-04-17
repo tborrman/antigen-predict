@@ -72,6 +72,9 @@ def main():
 		scoring_heatmap, delimiter='\t', fmt= '%1.4f')
 	np.savetxt('weblogo/abundant_' + str(bound) + '_peptides_submatrix.txt', 
 		abundant_heatmap, delimiter='\t', fmt= '%1.4f')
+	S_OUT.close()
+	A_OUT.close()
+	
 
 if __name__ == '__main__':
 	main()
