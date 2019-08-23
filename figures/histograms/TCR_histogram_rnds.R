@@ -214,8 +214,6 @@ par(xpd=FALSE)
 axis(1, lwd=2, cex.axis=1.5) 
 axis(2, lwd=2, cex.axis=1.5)
 box(bty="l")
-
-
 # 3QIU
 score_table_0 <- read.table(paste(wkdir, "/3QIU/preselection/all/score_table.txt", sep=""), header=TRUE, sep="\t")
 score_table_1 <- read.table(paste(wkdir, "/3QIU/round_1/all/score_table.txt", sep=""), header=TRUE, sep="\t")

@@ -13,6 +13,6 @@ Sequencing data downloaded from Sequence Read Archive (SRA) under project code [
 - `[PDB]_seq_check_heatmap.R`
 
 ### Score
-![Alt Text] (https://github.com/tborrman/antigen-predict/blob/master/score_pipeline.png)
+![alt text](https://github.com/tborrman/antigen-predict/blob/master/score_pipeline.png)
 
 
