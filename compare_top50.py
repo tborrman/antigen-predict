@@ -62,6 +62,9 @@ def main():
 	top50_abundant = Set(sorted_abundant[:50])
 
 	intersection = list(top50_scoring & top50_abundant)
+	#intersection = list(top50_scoring & Set(sorted_abundant))
+	#print len(intersection) 
+
 	# top50 scoring peptides that are NOT in top50 abundant
 	top50_abundant_comp = list(top50_scoring - top50_abundant)
 	# top50 abundant peptides that are NOT in top50 scoring
