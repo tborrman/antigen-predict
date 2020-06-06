@@ -19,7 +19,7 @@ def main():
 	# Submit rosetta3.5 jobs to cluster
 	
 	for part in range(1, proc + 1):
-		process = subprocess.Popen(['bsub', '-q', 'long', '-W', '36:00', '-e', 'job_' + str(part) + '_err', '-J', 'rosetta_' + str(part),'-R', 'rusage[mem=5000]', 'score.py', 
+		process = subprocess.Popen(['bsub', '-q', 'long', '-W', '36:00', '-n', '1', '-e', 'job_' + str(part) + '_err', '-J', 'rosetta_' + str(part),'-R', 'rusage[mem=5000]', 'score.py', 
 			'-in', 'redundant_out', '-part', str(part), '-pdb', pdb_ID, '-start', str(start), '-w', w])  
 
 if __name__ == '__main__':
