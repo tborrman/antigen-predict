@@ -51,7 +51,7 @@ plot_PR <- function(scores, labels, TCR, path, x) {
   perf <- performance(pred, "prec", "rec")
   png(paste(path, "/", TCR, "/AUC/5c1/PR_AUC_", TCR,"_", x, "_percentile_cutoff_all_scores.png", sep=""), 
       height=1800, width=1800, res=300)
-  plot(perf, col=as.list(mycolors), main=TCR, lwd=2)
+  plot(perf, col=as.list(mycolors), main=TCR, lwd=2, xlim=c(0,1), ylim=c(0,1))
   #abline(a=0, b=1, col="black", lty=2)
   auc.perf <- performance(pred, measure = "aucpr")
   legend("topright",paste(colnames(scores), rep(": ", 6),
