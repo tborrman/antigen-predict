@@ -23,10 +23,12 @@ anchors <- c("black", "red", "black", "red", rep("black", 7), "red", "red")
 # WT reside subset
 wt_df <- abundant_df.m[c(1,32,46,78,81,105,125,150,177,193,205,229,241),]
 # Substitution subset
-sub_df <- abundant_df.m[c(161,181,86,149,220),]
+# sub_df <- abundant_df.m[c(161,181,86,149,220),] before relax
+sub_df <- abundant_df.m[c(120,181,220),]
 
 
-png(paste(wkdir,"/", abundant_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
+#png(paste(wkdir,"/", abundant_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
+pdf(paste(wkdir,"/", abundant_file, "_heatmap_ggplot.pdf", sep=""), width=7, height=7)
 print(ggplot(abundant_df.m, aes(variable, amino, fill=value)) 
 	+ geom_tile()
 	+ scale_fill_gradient(low="white", high="forestgreen", breaks=c(0,1), lim=c(0,1)) 
@@ -55,13 +57,13 @@ score_df.m <- melt(score_df)
 anchors <- c("black", "red", "black", "red", rep("black", 7), "red", "red")
 
 # WT reside subset
-wt_df <- abundant_df.m[c(1,32,46,78,81,105,125,150,177,193,205,229,241),]
+wt_df <- score_df.m[c(1,32,46,78,81,105,125,150,177,193,205,229,241),]
 # Substitution subset
-sub_df <- abundant_df.m[c(161,181,86,149,220),]
+# sub_df <- abundant_df.m[c(161,181,86,149,220),] before relax
+sub_df <- score_df.m[c(120,181,220),]
 
-
-
-png(paste(wkdir,"/", score_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
+#png(paste(wkdir,"/", score_file, "_heatmap_ggplot.png", sep=""), width=2000, height=2000, res=300)
+pdf(paste(wkdir,"/", score_file, "_heatmap_ggplot.pdf", sep=""), width=7, height=7)
 print(ggplot(score_df.m, aes(variable, amino, fill=value)) 
 	+ geom_tile()
 	+ scale_fill_gradient(low="white", high="forestgreen", breaks=c(0,1), lim=c(0,1)) 
