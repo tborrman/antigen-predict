@@ -37,7 +37,8 @@ def main():
 	'''
 	#PRE = open('preselection/all/score_table_ADLIAYLKQATKG_preselection_remove_rnd4.txt', 'r')
 	#PRE = open('preselection/all/score_table_ANGVAFFLTPFKA_preselection_remove_rnd4.txt', 'r')
-	PRE = open('preselection/all/score_table_ENPVVHFFKNIVTP_preselection_remove_rnd4.txt', 'r')
+	#PRE = open('preselection/all/score_table_ENPVVHFFKNIVTP_preselection_remove_rnd4.txt', 'r')
+	PRE = open('preselection/all/score_table_preselection_remove_rnd4.txt', 'r')
 	RND4 = open('round_4/all/score_table_reads_95th_percentile.txt', 'r')
 
 	scores = {}
@@ -64,7 +65,7 @@ def main():
 	sorted_abundant = sorted(rnd4_scores.keys(), key = lambda k: rnd4_scores[k][0], reverse=True)
 	
 	# Make top scoring heatmaps
-	max_bound = 1000
+	max_bound = 100
 	for bound in range(1, max_bound + 1):
 		scoring_heatmap = heatmap(sorted_scoring[:bound])
 		abundant_heatmap = heatmap(sorted_abundant[:bound])

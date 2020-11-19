@@ -21,7 +21,7 @@ plot_ROC <- function(scores, labels, TCR, path, x) {
   #   TCR: character string of TCR
   #   path: character string full path to TCR/ directory
   #   x: numeric cutoff for read counts to identify as a positive
-  mycolors <- c("gray", "red")
+  mycolors <- c("black", "darkgrey", "lightskyblue", "red")
   pred <- prediction(scores, labels)
   perf <- performance(pred,"tpr","fpr")
   png(paste(path, "/AUC/ROC_AUC_modeller", TCR,"_", x, "_percentile_cutoff.png", sep=""), 
@@ -29,7 +29,7 @@ plot_ROC <- function(scores, labels, TCR, path, x) {
   plot(perf, col=as.list(mycolors), main=TCR, lwd=2)
   abline(a=0, b=1, col="black", lty=2)
   auc.perf <- performance(pred, measure = "auc")
-  legend("bottomright",paste(colnames(scores), rep(": ", 2),
+  legend("bottomright",paste(colnames(scores), rep(": ", 4),
                              round(as.numeric(auc.perf@y.values),2), sep=""), 
          col=mycolors, title="AUC", lty=1, lwd=2)
   dev.off()
@@ -46,7 +46,7 @@ plot_PR <- function(scores, labels, TCR, path, x) {
   #   TCR: character string of TCR
   #   path: character string full path to TCR/ directory
   #   x: numeric cutoff for read counts to identify as a positive
-  mycolors <- c("gray", "red")
+  mycolors <- c("black", "darkgrey", "lightskyblue", "red")
   pred <- prediction(scores, labels)
   perf <- performance(pred, "prec", "rec")
   png(paste(path, "/AUC/PR_AUC_modeller", TCR,"_", x, "_percentile_cutoff.png", sep=""), 
@@ -54,7 +54,7 @@ plot_PR <- function(scores, labels, TCR, path, x) {
   plot(perf, col=as.list(mycolors), main=TCR, lwd=2, xlim=c(0,1), ylim=c(0,1))
   #abline(a=0, b=1, col="black", lty=2)
   auc.perf <- performance(pred, measure = "aucpr")
-  legend("topright",paste(colnames(scores), rep(": ", 2),
+  legend("topright",paste(colnames(scores), rep(": ", 4),
                           round(as.numeric(auc.perf@y.values),2), sep=""), 
          col=mycolors, title="AUC", lty=1, lwd=2)
   dev.off()
@@ -69,21 +69,29 @@ if (args$t == "1YMM") {
                                 "/AUC/score_table_hamming_blosum_ENPVVHFFKNIVTP_round4.txt",
                                 sep=""), header=TRUE, sep="\t") 
 } else {
-  mod_negatives <- read.table(paste(wkdir, "/AUC/modeller_score_table_preselection_remove_rnd4.txt",
-                                sep=""), header=TRUE, sep="\t")
-  mod_positives <- read.table(paste(wkdir, "/AUC/modeller_score_table_round4.txt",
-                                sep=""), header=TRUE, sep="\t")
-  crystal_negatives <- read.table(paste(wkdir, "/AUC/score_table_hamming_blosum_ADLIAYLKQATKG_preselection_remove_rnd4.txt",
-                                sep=""), header=TRUE, sep="\t")
-  crystal_positives <- read.table(paste(wkdir, "/AUC/score_table_hamming_blosum_ADLIAYLKQATKG_round4.txt",
-                                sep=""), header=TRUE, sep="\t")
+  mod1_negatives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model1/preselection/all/score_table_preselection_remove_rnd4.txt",
+                               header=TRUE, sep="\t")
+  mod1_positives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model1/round_4/all/score_table_round4.txt",
+                               header=TRUE, sep="\t")
+  mod2_negatives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model2/preselection/all/score_table_preselection_remove_rnd4.txt",
+                               header=TRUE, sep="\t")
+  mod2_positives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model2/round_4/all/score_table_round4.txt",
+                               header=TRUE, sep="\t")
+  mod3_negatives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model3/preselection/all/score_table_preselection_remove_rnd4.txt",
+                               header=TRUE, sep="\t")
+  mod3_positives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/modeller/model3/round_4/all/score_table_round4.txt",
+                               header=TRUE, sep="\t")
+  crystal_negatives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/rosetta_relax/3QIB/AUC/score_table_hamming_blosum_ADLIAYLKQATKG_preselection_remove_rnd4.txt",
+                                   header=TRUE, sep="\t")
+  crystal_positives <- read.table("C:/Users/tyler/Dropbox (Personal)/UMASS/Research/TCR/rosetta_relax/3QIB/AUC/score_table_hamming_blosum_ADLIAYLKQATKG_round4.txt",
+                                  header=TRUE, sep="\t")
 }
 
-negatives <- cbind(mod_negatives[c(1,2,5)], crystal_negatives[5])
-colnames(negatives) <- c("peptide", "reads", "model_score", "crystal_score")
+negatives <- cbind(mod1_negatives[c(1,2,5)], mod2_negatives[5], mod3_negatives[5], crystal_negatives[5])
+colnames(negatives) <- c("peptide", "reads", "model1_score", "model2_score", "model3_score", "crystal_score")
 
-positives <- cbind(mod_positives[c(1,2,5)], crystal_positives[5])
-colnames(positives) <- c("peptide", "reads", "model_score", "crystal_score")
+positives <- cbind(mod1_positives[c(1,2,5)], mod2_positives[5], mod3_positives[5], crystal_positives[5])
+colnames(positives) <- c("peptide", "reads", "model1_score", "model2_score", "model3_score", "crystal_score")
 
 # add labels
 labels <- rep(FALSE, nrow(negatives))
@@ -99,11 +107,11 @@ positives <- positives[positives$reads >= q,]
 df <- rbind(negatives, positives)
 
 # Flip sign of scores for ROC predictions
-scores <- df[c("model_score", "crystal_score")]
+scores <- df[c("model1_score", "model2_score", "model3_score", "crystal_score")]
 all_scores <- data.frame(apply(scores, 2, function(x) x*(-1) ))
 
 # Make labels dataframe with same dimensions as rank_df
-df_lab <- data.frame(df$labels, df$labels)
+df_lab <- data.frame(df$labels, df$labels, df$labels, df$labels)
 
 # Plot ROC
 plot_ROC(all_scores, df_lab, args$t, wkdir, args$x)
